@@ -1,0 +1,48 @@
+{
+  "name": "fynd-extension-boilerplate",
+  "version": "1.0.0",
+  "description": "Production-grade Fynd Platform extension boilerplate with fit library integration",
+  "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "build": "npm run build:frontend",
+    "start:prod": "NODE_ENV=production node index.js",
+    "test": "jest --detectOpenHandles --json --outputFile=coverage/coverage.json"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "frontend/**",
+      "frontend/public/**"
+    ]
+  },
+  "dependencies": {
+    "@gofynd/fdk-extension-javascript": "1.1.0",
+    "@sentry/node": "^6.2.0",
+    "axios": "^1.7.2",
+    "convict": "^6.0.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "fit": "git+ssh://git@ssh.dev.azure.com/v3/GoFynd/CommonLibraries/fit.js#v2.5.4",
+    "lodash": "^4.17.21",
+    "mongodb-uri": "^0.9.7",
+    "mongoose": "^6.13.6"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.4",
+    "supertest": "^7.0.0"
+  },
+  "overrides": {
+    "body-parser": "1.20.3",
+    "cross-spawn": "7.0.5",
+    "semver": "^7.5.2",
+    "path-to-regexp": "0.1.12"
+  }
+}
