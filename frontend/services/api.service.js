@@ -28,3 +28,27 @@ export async function fetchApplicationProducts(application_id, company_id) {
   );
   return data;
 }
+
+/**
+ * Fetch all sales channels for a company with their activation state.
+ * Supports page, limit, search query params for nitrozen-react-extension SalesChannel component.
+ */
+export async function fetchSalesChannels({ company_id, page = 1, limit = 10, search = "" }) {
+  const { data } = await axios.get(urlJoin(BASE_URL, "/api/v1/sales-channels"), {
+    headers: { "x-company-id": company_id },
+    params: { page, limit, search },
+  });
+  return data;
+}
+
+/**
+ * Toggle activation state for a specific sales channel.
+ */
+export async function toggleSalesChannel(application_id, is_active, company_id) {
+  const { data } = await axios.post(
+    urlJoin(BASE_URL, `/api/v1/sales-channels/${application_id}`),
+    { is_active },
+    { headers: { "x-company-id": company_id } }
+  );
+  return data;
+}

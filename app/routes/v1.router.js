@@ -2,8 +2,11 @@
 
 const express = require("express");
 const logger = require("../common/logger");
+const salesChannelRouter = require("./sales-channel.router");
 
 const router = express.Router();
+
+router.use("/sales-channels", salesChannelRouter);
 
 /**
  * All routes here are mounted under fdkExtension.apiRoutes → /api/v1

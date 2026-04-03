@@ -1,20 +1,14 @@
+// Copied as-is from pan-verify src/App.tsx
 import React from "react";
-import { useParams } from "react-router-dom";
-import Home from "./pages/Home";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Routes from "./router";
 
-/**
- * Root application component.
- * Reads company_id and application_id from route params.
- * Pass these down to child components that need to make API calls.
- */
-function App() {
-  const { company_id, application_id } = useParams();
-
-  return (
-    <div className="app">
-      <Home company_id={company_id} application_id={application_id} />
-    </div>
-  );
-}
+const App = () => (
+  <>
+    <Routes />
+    <ToastContainer position="top-right" autoClose={3000} />
+  </>
+);
 
 export default App;

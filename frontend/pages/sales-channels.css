@@ -1,0 +1,5 @@
+/* nitrozen-react-extension handles all SalesChannel component styles.
+   This file only contains layout-level overrides. */
+.sales-channel-wrapper div img {
+  max-width: 216px;
+}
