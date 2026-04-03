@@ -9,13 +9,16 @@ const redis = require("fit/redis");
 const { mongoOptions } = require("./app/constants");
 
 // Wire fit connection keys before init
-// fit derives key from SERVICE_NAME: "my-ext" → "my_ext"
-// Then expects env var: MONGO_MY_EXT_READ_WRITE
+// fit key rule: "fynd-extension-boilerplate" → replace hyphens → "fynd_extension_boilerplate" → uppercase → "FYND_EXTENSION_BOILERPLATE"
+// env var: MONGO_FYND_EXTENSION_BOILERPLATE_READ_WRITE
+// Without replacing hyphens, fit creates a SECOND connection under "fynd-extension-boilerplate" key (double logs)
+const DB_KEY = config.APP_IDENTIFIER.replace(/-/g, "_").toUpperCase();
+
 process.env.SERVER_TYPE = config.mode;
 process.env.PORT = config.port;
 process.env.COOKIE_SECRET = "ext.session";
-process.env[`MONGO_${config.APP_IDENTIFIER.toUpperCase()}_READ_WRITE`] = config.mongo.uri;
-process.env[`REDIS_${config.APP_IDENTIFIER.toUpperCase()}_READ_WRITE`] = config.redis.uri;
+process.env[`MONGO_${DB_KEY}_READ_WRITE`] = config.mongo.uri;
+process.env[`REDIS_${DB_KEY}_READ_WRITE`] = config.redis.uri;
 
 Promise.all([
   mongo.init(mongoOptions),
